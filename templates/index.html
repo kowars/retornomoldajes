@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Ingreso de Retorno</title>
+</head>
+<body>
+  <h1>Registro de Retorno de Equipos</h1>
+  <form action="/add" method="post">
+    <label>Cliente: <input type="text" name="cliente" required></label><br>
+    <label>Obra: <input type="text" name="obra"></label><br>
+    <label>Equipo:
+      <select name="codigo">
+        {% for item in equipos %}
+        <option value="{{ item.codigo }}">{{ item.codigo }} - {{ item.equipo }}</option>
+        {% endfor %}
+      </select>
+    </label><br>
+    <label>Cantidad: <input type="number" name="cantidad" min="1" required></label><br>
+    <label>Observaciones: <input type="text" name="observaciones"></label><br>
+    <button type="submit">Agregar</button>
+  </form>
+
+  {% if retornos %}
+  <h2>Retornos ingresados</h2>
+  <table border="1" cellpadding="5">
+    <tr>
+      <th>Cliente</th>
+      <th>Obra</th>
+      <th>Código</th>
+      <th>Equipo</th>
+      <th>Cantidad</th>
+      <th>Observaciones</th>
+    </tr>
+    {% for r in retornos %}
+    <tr>
+      <td>{{ r.cliente }}</td>
+      <td>{{ r.obra }}</td>
+      <td>{{ r.codigo }}</td>
+      <td>{{ r.equipo }}</td>
+      <td>{{ r.cantidad }}</td>
+      <td>{{ r.observaciones }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>
